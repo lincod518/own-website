@@ -3,3 +3,5 @@
 node_modules/
 *.log
 .DS_Store
+# Keep the generated original locally; publish its optimized WebP copy.
+/assets/visuals/hero-explorer-v2.png

@@ -16,9 +16,12 @@ npm run dev
 ## 修改网站
 
 - `src/site.mjs`：公共布局、导航、图标与实验卡片。
+- `src/home.mjs`：首页的蓝色首屏、写作章节、实验预览、关于与 FAQ。
 - `src/posts.mjs`：文章标题、摘要、日期和正文。文章内容为可信 HTML，不接收访客提交。
 - `scripts/build.mjs`：首页和各页面模板；只写入明确的页面文件。
 - `assets/site.css`：配色、响应式布局和动效。
+- `assets/exhibit.css`、`assets/exhibit.mjs`：首页章节动效、动效暂停、键盘可操作的工具预览与阅读进度。
+- `assets/visuals/hero-explorer-v2.webp`：内置 ImageGen 生成的原创主视觉，转码为透明 WebP 用于网页；原始 PNG 保留在本地同目录并由 Git 忽略，同目录 `.prompt.txt` 保留生成提示词。
 - `assets/site.js`：导航、文章筛选、提示词与本地便签交互。
 - `assets/tools-model.mjs`：提示词组合及便签备份校验。
 

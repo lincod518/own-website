@@ -1,6 +1,8 @@
 import { composePrompt, presets, validateNotes, mergeNotes } from './tools-model.mjs';
+import { initExhibition } from './exhibit.mjs';
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const motionAllowed = () => !reducedMotion.matches && !document.documentElement.hasAttribute('data-motion-paused');
 const mobile = window.matchMedia('(max-width: 760px)');
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#site-nav');
@@ -31,7 +33,7 @@ if (universe && planet) {
   const captions = ['想法，在这里发生。', '写下来，就有了新的起点。', '好奇心，值得一次动手。', '慢慢来，让想法继续生长。'];
   if (window.matchMedia('(pointer: fine)').matches) {
     universe.addEventListener('pointermove', event => {
-      if (reducedMotion.matches) return;
+      if (!motionAllowed()) return;
       const rect = universe.getBoundingClientRect();
       universe.style.setProperty('--mx', ((event.clientX-rect.left)/rect.width-.5)*2);
       universe.style.setProperty('--my', ((event.clientY-rect.top)/rect.height-.5)*2);
@@ -42,7 +44,7 @@ if (universe && planet) {
     step++;
     universe.classList.toggle('is-spinning', step % 2 === 1);
     document.querySelector('#orbit-caption').textContent = captions[step % captions.length];
-    if (!reducedMotion.matches) {
+    if (motionAllowed()) {
       const burst = document.createElement('span');
       burst.className = 'hero-idea-burst'; burst.textContent = '✦'; burst.setAttribute('aria-hidden','true');
       universe.append(burst);
@@ -60,7 +62,7 @@ if (canvas && canvas.getContext('2d')) {
   const draw = () => {
     ctx.clearRect(0,0,width,height);
     for (const point of points) {
-      if (!reducedMotion.matches) point.y = (point.y+point.speed)%1;
+      if (motionAllowed()) point.y = (point.y+point.speed)%1;
       ctx.beginPath();ctx.arc(point.x*width,point.y*height,point.size,0,Math.PI*2);
       ctx.fillStyle = 'rgba(236,246,255,.65)';ctx.fill();
     }
@@ -68,7 +70,7 @@ if (canvas && canvas.getContext('2d')) {
   const tick = () => { draw(); frame = requestAnimationFrame(tick); };
   const update = () => {
     cancelAnimationFrame(frame);
-    if (!reducedMotion.matches && visible && !document.hidden) tick(); else draw();
+    if (motionAllowed() && visible && !document.hidden) tick(); else draw();
   };
   const resize = () => {
     const rect = canvas.getBoundingClientRect();
@@ -78,11 +80,12 @@ if (canvas && canvas.getContext('2d')) {
   };
   resize();window.addEventListener('resize',resize);
   document.addEventListener('visibilitychange',update);reducedMotion.addEventListener('change',update);
+  document.addEventListener('visual-motion-change',update);
   if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible=entries[0].isIntersecting;update(); }).observe(canvas);
   update();
 }
 
-if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+if (motionAllowed() && 'IntersectionObserver' in window) {
   const reveal = new IntersectionObserver(entries => {
     for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add('reveal-enter'); reveal.unobserve(entry.target); }
   }, {threshold:.08});
@@ -213,3 +216,5 @@ if(noteForm){
   });
   render();
 }
+
+initExhibition();

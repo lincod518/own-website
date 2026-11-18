@@ -14,20 +14,14 @@ export const icon = (name, cls = '') => {
 };
 export const mark = '<svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 1c2 12 7 17 19 19-12 2-17 7-19 19C18 27 13 22 1 20 13 18 18 13 20 1Z" fill="currentColor"/><circle cx="20" cy="20" r="4" fill="var(--logo-dot,#fff)"/></svg>';
 export const heroArt = `
-  <div class="idea-universe" data-parallax>
-    <div class="universe-grid"></div>
-    <div class="orbit-line orbit-one"></div><div class="orbit-line orbit-two"></div>
-    <div class="planet-shadow"></div>
-    <button class="idea-planet" type="button" aria-label="转动灵感星球" data-orbit>
-      <span class="planet-shine"></span>
-      <span class="planet-spark">${mark}</span>
-      <span class="planet-small">一 个 想 法</span>
+  <div class="idea-universe explorer-stage" data-parallax>
+    <div class="explorer-orbit explorer-orbit-a" aria-hidden="true"></div><div class="explorer-orbit explorer-orbit-b" aria-hidden="true"></div>
+    <span class="explorer-coordinate" aria-hidden="true">好奇心 / 始终在线</span>
+    <button class="explorer-button" type="button" aria-label="点亮灵感探索者" data-orbit>
+      <img class="explorer-image" src="./assets/visuals/hero-explorer-v2.webp" width="1254" height="1254" alt="" fetchpriority="high" decoding="async">
     </button>
-    <span class="satellite satellite-note">${icon('pen')}<span>所思所想</span></span>
-    <span class="satellite satellite-lab">${icon('spark')}<span>AI 实验</span></span>
-    <span class="satellite satellite-code" aria-hidden="true">&lt; / &gt;</span>
-    <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
-    <div class="idea-caption"><span class="tiny-star">✦</span><span id="orbit-caption" aria-live="polite">想法，在这里发生。</span><span class="caption-hint">点一下星球 ↗</span></div>
+    <span class="explorer-sticker" aria-hidden="true">想到了，<br>就去试试！</span>
+    <div class="idea-caption"><span class="tiny-star">✦</span><span id="orbit-caption" aria-live="polite">想法，在这里发生。</span><span class="caption-hint">点一下，打个招呼 ↗</span></div>
   </div>`;
 export function layout({ route = '', title, description, content, active = 'home', bodyClass = '' }) {
   const depth = route.split('/').filter(Boolean).length;
@@ -41,7 +35,7 @@ export function layout({ route = '', title, description, content, active = 'home
   <meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:type" content="website">
   <title>${title}</title><link rel="icon" href="${r}assets/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://lincod518.github.io/own-website/${route}">
-  <link rel="stylesheet" href="${r}assets/site.css"><script type="module" src="${r}assets/site.js"></script>
+  <link rel="stylesheet" href="${r}assets/site.css?v=2">${bodyClass.includes('home-page') ? `<link rel="stylesheet" href="${r}assets/exhibit.css?v=2"><link rel="preload" as="image" href="${r}assets/visuals/hero-explorer-v2.webp" fetchpriority="high">` : ''}<script type="module" src="${r}assets/site.js?v=2"></script>
 </head>
 <body class="${bodyClass}">
   <a href="#main" class="skip-link">跳到主要内容</a>

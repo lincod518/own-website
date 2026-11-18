@@ -12,6 +12,9 @@ for(const [file,html] of pages){
   if((html.match(/<h1[ >]/g)||[]).length!==1)errors.push(`${file}: expected one H1`);
   const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
   if(new Set(ids).size!==ids.length)errors.push(`${file}: duplicate IDs`);
+  for(const reference of html.matchAll(/(?:aria-controls|aria-labelledby)="([^"]+)"/g)){
+    for(const id of reference[1].split(/\s+/))if(!ids.includes(id))errors.push(`${file}: missing ARIA target ${id}`);
+  }
   for(const match of html.matchAll(/(?:href|src)="([^"]+)"/g)){
     const value=match[1];if(/^(?:https?:|data:|mailto:|tel:)/.test(value))continue;
     const [relative,hash]=value.split('#');
