@@ -1,6 +1,59 @@
 @charset "UTF-8";
 :root{color-scheme:light;--paper:#f8f9fc;--white:#fff;--ink:#142444;--muted:#68738a;--blue:#245de8;--navy:#142b62;--orange:#f46138;--line:#dfe5ef;--serif:"Kaiti SC","KaiTi","STKaiti","Songti SC",serif;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;--mono:"SFMono-Regular",Consolas,monospace}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:110px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default}svg{display:block}button svg{pointer-events:none}[hidden]{display:none!important}::selection{color:#102b61;background:#b9d6ff}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid #ee8d28;outline-offset:5px}.shell{width:min(1160px,calc(100% - 88px));margin-inline:auto}.icon{display:inline-block;vertical-align:middle;flex-shrink:0;width:21px;height:21px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip-link{position:fixed;z-index:1000;top:12px;left:20px;padding:12px 20px;background:#fff;color:var(--navy);border-radius:12px;transform:translateY(-180%)}.skip-link:focus{transform:translateY(0)}.orange{color:var(--orange)}.serif{font-family:var(--serif);font-weight:500}.eyebrow{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:11px;letter-spacing:.12em;margin:0 0 15px}.inline-link{display:inline-flex;align-items:center;gap:15px;font-size:13px;font-weight:600;white-space:nowrap}.inline-link:hover{color:var(--blue)}.inline-link .icon{width:18px;height:18px;transition:transform .2s}.inline-link:hover .icon{transform:translateX(4px)}.button{border:0;display:inline-flex;align-items:center;justify-content:center;gap:22px;padding:15px 24px;min-height:51px;border-radius:999px;font-size:13px;font-weight:650;line-height:1.4;transition:transform .2s,box-shadow .2s,background-color .2s}.button:hover{transform:translateY(-3px)}.button:active{transform:translateY(0)}.button .icon{width:19px;height:19px}.button-white{background:white;color:var(--navy);box-shadow:0 7px 25px #123e9225}.button-outline{color:white;border:1px solid #ffffff70;background:#ffffff0b}.button-outline:hover{background:#ffffff20}.button-blue{color:white;background:var(--blue);box-shadow:0 5px 16px #245de81c}.button-blue:hover{background:#164ed4}.button-quiet{background:#edf1f8;color:#435475}.small-button{font-size:12px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);line-height:1.5}.small-button:hover{border-color:var(--blue);color:var(--blue)}
+/* Interactive AI experiment and its companion article. */
+.sampling-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.14fr) minmax(210px, .86fr);
+  align-items: center;
+  gap: clamp(22px, 5vw, 72px);
+  padding: clamp(22px, 4vw, 52px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+}
+.sampling-feature h3 { margin: 0; font-size: clamp(1.75rem, 3vw, 2.6rem); line-height: 1.3; }
+.sampling-feature .eyebrow, .sampling-feature .inline-link { font-size: .875rem; }
+.sampling-feature .button, .sampling-page .button { font-size: 1rem; }
+.sampling-feature p:not(.eyebrow) { max-width: 35em; color: var(--muted); }
+.feature-links { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 22px; margin-top: 22px; }
+.sampling-mini { margin: 0; }
+.sampling-mini figcaption { margin-bottom: .8em; color: var(--muted); font-size: .875rem; }
+.sampling-mini > div { display: grid; grid-template-columns: 3.5em 1fr 3.5em; align-items: center; gap: 10px; padding: 6px 0; font-size: .9rem; }
+.sampling-mini i, .chance-track { display: block; background: var(--line); height: 8px; }
+.sampling-mini i::after { content: ""; display: block; width: var(--chance); height: 100%; background: var(--blue); }
+.sampling-mini b { text-align: right; color: var(--navy); font-family: var(--mono); }
+.lab-tools-title { margin: 2.2em 0 .7em; }
+.sampling-sentence { margin: 0 0 1.5em; padding: 1em; background: var(--paper); color: var(--ink); font-size: 1.1rem; line-height: 1.8; }
+.sampling-sentence strong { color: var(--blue); }
+.temperature-label, .temperature-scale { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.temperature-label { font-weight: 650; }
+.temperature-label output { font: 700 1.55rem var(--mono); color: var(--blue); }
+[data-temperature] { width: 100%; height: 44px; margin: 3px 0 0; accent-color: var(--blue); cursor: pointer; }
+.temperature-scale { font-size: .875rem; color: var(--muted); margin-bottom: 1.4rem; }
+.chance-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.chance-table th, .chance-table td { padding: 12px 4px; border-bottom: 1px solid var(--line); text-align: left; }
+.chance-table thead th { color: var(--muted); font-size: .875rem; font-weight: 550; }
+.chance-table th:last-child, .chance-table td:last-child { text-align: right; }
+.chance-table [data-percent], .chance-table [data-count] { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.chance-track { width: 100%; height: 5px; max-width: 180px; margin: 0 0 5px; }
+.chance-track i { display: block; height: 100%; background: var(--blue); }
+.paired-reading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 2rem; padding: 20px 24px; border: 1px solid var(--line); border-left: 3px solid var(--blue); background: var(--white); }
+.paired-reading:hover { border-color: var(--blue); }
+.paired-reading small, .paired-reading strong { display: block; }
+.paired-reading small { color: var(--muted); font-size: .875rem; margin-bottom: 3px; }
+.sampling-workspace .tool-status, .sampling-workspace .privacy-note { font-size: .875rem; }
+.sampling-page .tool-header > p:last-child { font-size: 1rem; }
+.sampling-page .breadcrumb { font-size: .875rem; }
+.sampling-page .panel-heading h2 { font-size: 1.25rem; }
+.sampling-workspace, .sampling-workspace > section { min-width: 0; }
+.article .prose, .writing-index .post-copy p { font-size: 1rem; }
+.article .article-meta, .writing-index .post-date time, .writing-index .post-date > span { font-size: .8125rem; }
+.article .breadcrumb, .article .inline-link, .writing-index .filter-tabs button, .writing-index .search-field input { font-size: .875rem; }
+.article .inline-link { white-space: normal; }
+.writing-index .filter-tabs { flex-wrap: wrap; }
+.prose a { color: var(--blue); text-decoration: underline; text-underline-offset: .2em; }
+@media (max-width: 720px) { .sampling-feature { grid-template-columns: 1fr; } }
 /* Floating navigation */
 .site-header{position:fixed;z-index:100;inset:19px 25px auto;pointer-events:none}.nav-shell{width:min(1160px,100%);margin:auto;padding:8px 10px 8px 18px;min-height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-radius:999px;background:#fffffff0;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 8px 32px #152d6816,inset 0 0 0 1px #ffffffa0;pointer-events:auto}.brand{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:750;letter-spacing:-.045em;white-space:nowrap}.brand-mark{width:30px;height:30px;color:var(--blue)}.brand-mark svg{width:100%;height:100%}.brand-divider{padding:0 10px;color:#acb4c5;font-weight:400}.brand small{font-size:10px;letter-spacing:.09em;font-weight:500;color:#66728a}.site-nav{display:flex;align-items:center;gap:4px}.site-nav>a{padding:10px 15px;font-size:12px;border-radius:999px;color:#495670;transition:background .2s}.site-nav>a:hover,.site-nav>a[aria-current=page]{background:#eaf0fc;color:var(--blue)}.site-nav .nav-github{display:inline-flex;align-items:center;gap:8px;color:white;background:var(--navy);margin-left:7px;padding-inline:17px}.site-nav .nav-github:hover{background:#244584;color:white}.nav-github .icon{width:16px;height:16px}.nav-github .icon:last-child{width:13px;height:13px}.menu-toggle{border:0;background:#eaf0fc;color:var(--navy);border-radius:999px;padding:9px 14px;font-size:12px;align-items:center;gap:8px}.menu-toggle .icon{width:15px;height:15px}
 /* The sky: original, code-drawn idea planet */

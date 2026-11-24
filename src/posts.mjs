@@ -1,5 +1,8 @@
 // Add writing here, then run `npm run build` to generate the static pages.
+import { samplingArticle } from './sampling-page.mjs';
+
 export const posts = [
+  samplingArticle,
   {
     slug: 'a-place-for-thoughts',
     title: '给所思所想，一个自己的地址',

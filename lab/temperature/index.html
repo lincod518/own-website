@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="动手调节温度，观察四个候选词的理论概率与 100 次抽样频数。"><meta name="theme-color" content="#245de8">
+  <meta property="og:title" content="采样温度实验 · lincod518 AI 实验室"><meta property="og:description" content="动手调节温度，观察四个候选词的理论概率与 100 次抽样频数。"><meta property="og:type" content="website">
+  <title>采样温度实验 · lincod518 AI 实验室</title><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://lincod518.github.io/own-website/lab/temperature/">
+  <link rel="stylesheet" href="../../assets/site.css?v=3"><script type="module" src="../../assets/site.js?v=2"></script>
+</head>
+<body class="">
+  <a href="#main" class="skip-link">跳到主要内容</a>
+  <header class="site-header"><div class="nav-shell">
+    <a class="brand" href="../../" aria-label="lincod518 首页"><span class="brand-mark"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 1c2 12 7 17 19 19-12 2-17 7-19 19C18 27 13 22 1 20 13 18 18 13 20 1Z" fill="currentColor"/><circle cx="20" cy="20" r="4" fill="var(--logo-dot,#fff)"/></svg></span><span>lincod518<span class="brand-divider">/</span><small>思考与实验</small></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>菜单 <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>
+    <nav class="site-nav" id="site-nav" aria-label="主导航"><a href="../../">首页</a><a href="../../writing/">写作</a><a href="../../lab/" aria-current="page">实验室</a><a href="../../#about">关于这里</a><a class="nav-github" href="https://github.com/lincod518" target="_blank" rel="noopener noreferrer" aria-label="GitHub（在新标签页打开）"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.2-6-2.7M15 22v-3.5c0-1 .1-1.5-.5-2 3.6-.4 7.5-1.8 7.5-8a6.3 6.3 0 0 0-1.8-4.4c.2-.5.8-2.2-.2-4.1 0 0-1.5-.4-4.7 1.7a16 16 0 0 0-8.6 0C3.5-.4 2-.0 2-.0c-1 1.9-.4 3.6-.2 4.1A6.3 6.3 0 0 0 0 8.5c0 6.2 3.9 7.6 7.5 8-.5.4-.5 1-.5 2V22" transform="translate(2 1) scale(.85)"/></svg><span>GitHub</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></nav>
+  </div></header>
+  <main id="main"><section class="shell tool-page sampling-page">
+    <header class="tool-header"><a class="breadcrumb" href="../">返回实验室</a>
+      <h1>采样温度实验</h1><p>给同一个填空设定四个候选词。拖动温度，再抽 100 次，比较理论概率和实际次数。</p></header>
+    <div class="tool-workspace sampling-workspace" data-sampling>
+      <section class="tool-panel"><div class="panel-heading"><h2>给句子续一个词</h2></div>
+        <p class="sampling-sentence">合上笔记后，我决定去<strong data-drawn-word>____</strong>。</p>
+        <label class="temperature-label" for="temperature">采样温度 T <output for="temperature" data-temperature-value>1.0</output></label>
+        <input id="temperature" data-temperature type="range" min="0.2" max="2" step="0.1" value="1" aria-describedby="temperature-hint" disabled>
+        <div class="temperature-scale" aria-hidden="true"><span>0.2 · 更集中</span><span>2.0 · 更均匀</span></div>
+        <div class="result-actions"><button class="button button-blue" type="button" data-draw-one disabled>抽一个词</button>
+          <button class="button button-quiet" type="button" data-draw-batch disabled>抽 100 次</button></div>
+        <p class="tool-status" data-sampling-status role="status" aria-live="polite" aria-atomic="true"></p>
+        <noscript><p>启用 JavaScript 后可以调节温度并抽样，下表为温度 1.0 时的概率。</p></noscript>
+      </section>
+      <section class="tool-panel"><div class="panel-heading"><h2>候选词分布</h2></div>
+        <table class="chance-table"><caption class="sr-only">当前温度下的理论概率与本组抽样次数</caption><thead><tr><th scope="col">候选词</th><th scope="col">理论概率</th><th scope="col" data-batch-heading>抽取次数</th></tr></thead>
+          <tbody><tr data-candidate><th scope="row">散步</th><td>
+      <span class="chance-track" aria-hidden="true"><i data-bar style="width:55.0%"></i></span>
+      <span data-percent>55.0%</span></td><td data-count>—</td></tr><tr data-candidate><th scope="row">写作</th><td>
+      <span class="chance-track" aria-hidden="true"><i data-bar style="width:25.0%"></i></span>
+      <span data-percent>25.0%</span></td><td data-count>—</td></tr><tr data-candidate><th scope="row">画画</th><td>
+      <span class="chance-track" aria-hidden="true"><i data-bar style="width:15.0%"></i></span>
+      <span data-percent>15.0%</span></td><td data-count>—</td></tr><tr data-candidate><th scope="row">看星星</th><td>
+      <span class="chance-track" aria-hidden="true"><i data-bar style="width:5.0%"></i></span>
+      <span data-percent>5.0%</span></td><td data-count>—</td></tr></tbody></table>
+        <p class="privacy-note" id="temperature-hint">四个起始权重为演示设定。低温更集中，高温更均匀。每组抽样单独计数。</p>
+      </section>
+    </div>
+    <a class="paired-reading" href="../../writing/what-temperature-changes/">
+      <span><small>配套文章</small><strong>把温度调高，AI 会换一个词吗？</strong></span></a>
+    <script type="module" src="../../assets/sampling-ui.mjs"></script></section></main>
+  <footer class="site-footer"><div class="shell footer-top"><a class="footer-brand" href="../../"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 1c2 12 7 17 19 19-12 2-17 7-19 19C18 27 13 22 1 20 13 18 18 13 20 1Z" fill="currentColor"/><circle cx="20" cy="20" r="4" fill="var(--logo-dot,#fff)"/></svg><span>lincod518<small>思考有迹，探索有光。</small></span></a><div class="footer-links"><a href="../../writing/">去读一读 <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a><a href="../../lab/">去试一试 <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a><a href="#main">回到顶部 ↑</a></div></div><div class="shell footer-bottom"><span>© 2026 lincod518 · 一个持续生长的个人空间</span><span>保持好奇，慢慢发生 <span class="orange">✳</span></span></div></footer>
+</body></html>

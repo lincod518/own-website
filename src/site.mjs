@@ -35,7 +35,7 @@ export function layout({ route = '', title, description, content, active = 'home
   <meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:type" content="website">
   <title>${title}</title><link rel="icon" href="${r}assets/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://lincod518.github.io/own-website/${route}">
-  <link rel="stylesheet" href="${r}assets/site.css?v=2">${bodyClass.includes('home-page') ? `<link rel="stylesheet" href="${r}assets/exhibit.css?v=2"><link rel="preload" as="image" href="${r}assets/visuals/hero-explorer-v2.webp" fetchpriority="high">` : ''}<script type="module" src="${r}assets/site.js?v=2"></script>
+  <link rel="stylesheet" href="${r}assets/site.css?v=3">${bodyClass.includes('home-page') ? `<link rel="stylesheet" href="${r}assets/exhibit.css?v=3"><link rel="preload" as="image" href="${r}assets/visuals/hero-explorer-v2.webp" fetchpriority="high">` : ''}<script type="module" src="${r}assets/site.js?v=2"></script>
 </head>
 <body class="${bodyClass}">
   <a href="#main" class="skip-link">跳到主要内容</a>
